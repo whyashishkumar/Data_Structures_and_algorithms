@@ -14,9 +14,9 @@ public:
             else if(p1->val==p2->val){
                 p3->next=p1;
                 p3=p3->next;
+			p1=p1->next;
                 p3->next=p2;
                 p3=p3->next;
-                p1=p1->next;
                 p2=p2->next;
             }
             else if(p1->val<p2->val){
