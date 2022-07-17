@@ -1,0 +1,37 @@
+void insert(Node* &head,Node* &tail,int data){
+        Node* n=new Node(data);
+        if(head==NULL){
+            head=n;
+            tail=n;
+            return;
+        }
+        tail->next=n;
+        tail=n;
+    }
+    Node *copyList(Node *head)
+    {
+        //Write your code here
+        Node* anshead=NULL;
+        Node* anstail=NULL;
+        Node* temp=head;
+        while(temp!=NULL){
+            insert(anshead,anstail,temp->data);
+            temp=temp->next;
+        }
+        unordered_map<Node*,Node*> mapping;
+        temp=head;
+        Node* clone=anshead;
+        while(temp!=NULL){
+            mapping[temp]=clone;
+            temp=temp->next;
+            clone=clone->next;
+        }
+        temp=head;
+        clone=anshead;
+        while(clone!=NULL){
+            clone->arb=mapping[temp->arb];
+            temp=temp->next;
+            clone=clone->next;
+        }
+        return anshead;
+    }
