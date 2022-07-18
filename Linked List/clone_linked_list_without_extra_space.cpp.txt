@@ -1,0 +1,55 @@
+public:
+    void insert(Node* &head,Node* &tail,int data){
+        Node* n=new Node(data);
+        if(head==NULL){
+            head=n;
+            tail=n;
+            return;
+        }
+        tail->next=n;
+        tail=tail->next;
+    }
+    Node *copyList(Node *head)
+    {
+        //Write your code here
+        Node* anshead=NULL;
+        Node* anstail=anshead;
+        Node* temp=head;
+        while(temp!=NULL){
+            insert(anshead,anstail,temp->data);
+            temp=temp->next;
+        }
+        Node* originalhead=head;
+        Node* clonehead=anshead;
+        while(originalhead!=NULL && clonehead!=NULL){
+            Node* next=originalhead->next;
+            originalhead->next=anshead;
+            originalhead=next;
+            next=clonehead->next;
+            clonehead->next=originalhead;
+            clonehead=next;
+        }
+        clonehead=anshead;
+        originalhead=head;
+        while(originalhead!=NULL && clonehead!=NULL){
+            if(originalhead->arb!=NULL){
+                clonehead->arb=originalhead->arb->next;
+            }
+            else{
+                clonehead->arb=NULL;
+            }
+            originalhead=clonehead->next; 
+            clonehead=originalhead->next;
+        }
+        originalhead=head;
+        clonehead=anshead;
+        while(originalhead!=NULL && clonehead!=NULL){
+            originalhead->next=clonehead->next;
+            originalhead=originalhead->next;
+            if(originalhead!=NULL){
+                clonehead->next=originalhead->next;
+            }
+            clonehead=clonehead->next;
+        }
+        return anshead;
+    }
