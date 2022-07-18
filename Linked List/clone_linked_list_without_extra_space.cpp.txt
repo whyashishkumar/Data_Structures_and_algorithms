@@ -11,7 +11,8 @@ public:
     }
     Node *copyList(Node *head)
     {
-        //Write your code here
+        // copy the list 
+        
         Node* anshead=NULL;
         Node* anstail=anshead;
         Node* temp=head;
@@ -19,6 +20,9 @@ public:
             insert(anshead,anstail,temp->data);
             temp=temp->next;
         }
+        
+        //add the new nodes between old ones
+        
         Node* originalhead=head;
         Node* clonehead=anshead;
         while(originalhead!=NULL && clonehead!=NULL){
@@ -29,6 +33,9 @@ public:
             clonehead->next=originalhead;
             clonehead=next;
         }
+        
+        //copy random pointer
+        
         clonehead=anshead;
         originalhead=head;
         while(originalhead!=NULL && clonehead!=NULL){
@@ -41,6 +48,9 @@ public:
             originalhead=clonehead->next; 
             clonehead=originalhead->next;
         }
+        
+        // revert the list
+        
         originalhead=head;
         clonehead=anshead;
         while(originalhead!=NULL && clonehead!=NULL){
@@ -51,5 +61,8 @@ public:
             }
             clonehead=clonehead->next;
         }
+        
+        //return the ans
+        
         return anshead;
     }
