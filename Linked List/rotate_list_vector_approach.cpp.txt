@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<int> rotate(vector<int> v,int k){
+        vector<int> temp(v.size());
+        for(int i=0;i<v.size();i++){
+            int n=(i+k)%v.size();
+            temp[n]=v[i];
+        }
+        return temp;
+    }
+    ListNode* rotateRight(ListNode* head, int k) {
+        vector<int> v;
+        ListNode* temp=head;
+        while(temp!=NULL){
+            v.push_back(temp->val);
+            temp=temp->next;
+        }
+        v=rotate(v,k);
+        temp=head;
+        int i=0;
+        while(temp!=NULL){
+            temp->val=v[i++];
+            temp=temp->next;
+        }
+        return head;
+    }
+};
