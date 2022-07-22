@@ -1,0 +1,17 @@
+void solve(stack<int>& St, int x){
+    if(St.empty()){
+        St.push(x);
+        return;
+    }
+    int num=St.top();
+    St.pop();
+    solve(St,x);
+    St.push(num);
+    return;
+}
+stack<int> pushAtBottom(stack<int>& myStack, int x) 
+{
+    // Write your code here.
+    solve(myStack,x);
+    return myStack;
+}
