@@ -1,0 +1,21 @@
+void insert(stack<int> &stack,int x){
+    if(stack.empty()){
+        stack.push(x);
+        return;
+    }
+    int num=stack.top();
+    stack.pop();
+    insert(stack,x);
+    stack.push(num);
+    return;
+}
+void reverseStack(stack<int> &stack) {
+    if(stack.empty()){
+        return;
+    }
+    int x=stack.top();
+    stack.pop();
+    reverseStack(stack);
+    insert(stack,x);
+    return;
+}
