@@ -1,0 +1,27 @@
+void sort(stack<int> &stack,int x){
+    if(stack.empty()){
+        stack.push(x);
+        return;
+    }
+    if(stack.top()<=x){
+        stack.push(x);
+        return;
+    }
+    else{
+        int num=stack.top();
+        stack.pop();
+        sort(stack,x);
+        stack.push(num);
+    }
+    return;
+}
+void sortStack(stack<int> &stack){
+	if(stack.empty()){
+        return;
+    }
+    int x=stack.top();
+    stack.pop();
+    sortStack(stack);
+    sort(stack,x);
+    return;
+}
