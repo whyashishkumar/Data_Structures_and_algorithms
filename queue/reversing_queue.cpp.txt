@@ -1,0 +1,10 @@
+queue<int> rev(queue<int> q){
+    if(q.empty()){
+        return q;
+    }
+    int x=q.front();
+    q.pop();
+    q=rev(q);
+    q.push(x);
+    return q;
+}
