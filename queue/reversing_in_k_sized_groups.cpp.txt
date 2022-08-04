@@ -1,0 +1,20 @@
+queue<int> modifyQueue(queue<int> q, int k) {
+    // add code here.
+    stack<int> s;
+    queue<int> ans;
+    int c=0;
+    while(c!=k){
+        s.push(q.front());
+        q.pop();
+        c++;
+    }
+    while(!s.empty()){
+        ans.push(s.top());
+        s.pop();
+    }
+    while(!q.empty()){
+        ans.push(q.front());
+        q.pop();
+    }
+    return ans;
+}
