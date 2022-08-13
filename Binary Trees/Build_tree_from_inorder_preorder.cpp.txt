@@ -1,0 +1,26 @@
+class Solution{
+    public:
+    Node* solve(int in[], int pre[], int n, int &index, int instart, int inend, map<int,int> &mapping){
+        if(index>=n || instart>inend){
+            return NULL;
+        }
+        
+        int element=pre[index++];
+        Node* root=new Node(element);
+        int pos=mapping[element];
+        
+        root->left=solve(in,pre,n,index,instart,pos-1,mapping);
+        root->right=solve(in,pre,n,index,pos+1,inend,mapping);
+        
+        return root;
+    }
+    Node* buildTree(int in[],int pre[], int n){
+        int index=0;
+        map<int,int> mapping;
+        for(int i=0;i<n;i++){
+            mapping[in[i]]=i;
+        }
+        Node* ans=solve(in,pre,n,index,0,n-1,mapping);
+        return ans;
+    }
+};
