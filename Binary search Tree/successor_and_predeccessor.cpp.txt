@@ -1,0 +1,23 @@
+void findPreSuc(Node* root, Node*& pre, Node*& suc, int key){
+    while(root->data!=key){
+        if(root->data < key){
+            pre=root->data;
+            root=root->right;
+        }
+        else{
+            suc=root->data;
+            root=root->left;
+        }
+    }
+    Node* leftans=root->left;
+    while(leftans!=NULL){
+        pre=leftans->data;
+        leftans=leftans->right;
+    }
+    Node* rightans=root->right;
+    while(rightans!=NULL){
+        suc=rightans->data;
+        rightans=rightans->left;
+    }
+    return;
+}
