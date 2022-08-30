@@ -1,0 +1,40 @@
+class Solution {
+public:
+    bool iscycle(ListNode* &head){
+        ListNode* slow=head;
+        ListNode* fast=head;
+        while(fast!=NULL && fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+            if(slow==fast){
+                return true;
+            }
+        }
+        return false;
+    }
+    ListNode *detectCycle(ListNode *head) {
+        if(head==NULL || head->next==NULL){
+            return NULL;
+        }
+        
+        if(head==head->next->next || head==head->next){
+            return head;
+        }
+        bool check=iscycle(head);
+        if(check){
+            ListNode* slow=head->next;
+            ListNode* fast=head->next->next;
+            while(fast!=slow){
+                slow=slow->next;
+                fast=fast->next->next;
+            }
+            slow=head;
+            while(fast->next!=slow->next){
+                slow=slow->next;
+                fast=fast->next;
+            }
+            return slow->next;
+        }
+        return NULL;
+    }
+};
