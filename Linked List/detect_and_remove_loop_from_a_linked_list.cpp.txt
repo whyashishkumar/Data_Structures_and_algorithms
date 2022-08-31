@@ -1,0 +1,48 @@
+class Solution
+{
+    public:
+    bool check(Node* head){
+        if(head==NULL){
+            return false;
+        }
+        if(head->next==head){
+            return true;
+        }
+        Node* slow=head;
+        Node* fast=head;
+        while(fast!=NULL && fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+            if(slow==fast){
+                return true;
+            }
+        }
+        return false;
+    }
+    void removeLoop(Node* head){
+        // code here
+        if(!check(head)){
+            return;
+        }
+        Node* slow=head;
+        Node* fast=head;
+        do{
+            slow=slow->next;
+            fast=fast->next->next;
+        }while(slow!=fast);
+        slow=head;
+        if(slow==fast){
+            while(fast->next!=slow){
+                fast=fast->next;
+            }
+        }
+        else{
+            while(slow->next!=fast->next){
+                slow=slow->next;
+                fast=fast->next;
+            }   
+        }
+        fast->next=NULL;
+        return ;
+    }
+};
