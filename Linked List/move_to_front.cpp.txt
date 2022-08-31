@@ -1,0 +1,18 @@
+LinkedListNode<int>* moveToFront(LinkedListNode<int> *head) {
+
+    /*
+     Don't write main().
+     Don't read input, it is passed as function argument.
+     Write your code here.
+    */
+    LinkedListNode<int> *temp=head;
+    LinkedListNode<int> *prev;
+    while(temp->next!=NULL){
+        prev=temp;
+        temp=temp->next;
+    }
+    prev->next=NULL;
+    temp->next=head;
+    head=temp;
+    return he
+}
