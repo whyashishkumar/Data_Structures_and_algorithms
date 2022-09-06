@@ -1,0 +1,21 @@
+class Solution {
+public:
+    TreeNode* prune(TreeNode* &root){
+        if(root==NULL){
+            return NULL;
+        }
+        
+        TreeNode* left=prune(root->left);
+        TreeNode* right=prune(root->right);
+        
+        if(left==NULL && right==NULL && root->val!=1){
+            root=NULL;
+            return root;
+        }
+        return root;
+    }
+    TreeNode* pruneTree(TreeNode* root) {
+        TreeNode* ans=prune(root);
+        return ans;
+    }
+};
