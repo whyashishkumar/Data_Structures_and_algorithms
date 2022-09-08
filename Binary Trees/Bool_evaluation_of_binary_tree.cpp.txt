@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bool evaluateTree(TreeNode* root) {
+        if(root->left==NULL && root->right==NULL){
+            if(root->val==0){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+        if(root->val==3){
+            bool left=evaluateTree(root->left);
+            bool right=evaluateTree(root->right);
+            return (left && right);
+        }
+        else{
+            bool left=evaluateTree(root->left);
+            bool right=evaluateTree(root->right);
+            return (left || right);
+        }
+        return true;
+    }
+};
