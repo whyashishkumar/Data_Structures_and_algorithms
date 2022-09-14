@@ -1,0 +1,60 @@
+class Solution {
+  public:
+    int count(struct Node* root){
+        if(root==NULL){
+            return 0;
+        }
+        int ans=1+count(root->left)+count(root->right);
+        return ans;
+    }
+    bool isCBT(struct Node* root,int count,int index){
+        if(root==NULL){
+            return true;
+        }
+        if(index>=count){
+            return false;
+        }
+        bool left=isCBT(root->left,count,2*index+1);
+        bool right=isCBT(root->right,count,2*index+2);
+        if(left && right){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    bool Heap(struct Node* root){
+        if(root->left==NULL && root->right==NULL){
+            return true;
+        }
+        if(root->right==NULL){
+            if(root->data > root->left->data){
+                return true;
+            }
+            return false;
+        }
+        else{
+            bool left=Heap(root->left);
+            bool right=Heap(root->right);
+            bool order;
+            if(root->data > root->left->data && root->data > root->right->data){
+                order=true;
+            }
+            else{
+                order=false;
+            }
+            if(left && right && order){
+                return true;
+            }
+            return false;
+        }
+        
+    }
+    bool isHeap(struct Node* root) {
+        int c=count(root);
+        if(isCBT(root,c,0) && Heap(root)){
+            return true;
+        }
+        return false;
+    }
+};
