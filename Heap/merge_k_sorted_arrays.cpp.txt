@@ -1,0 +1,45 @@
+class node{
+    public:
+    int data;
+    int i;
+    int j;
+    node(int data,int row,int col){
+        this->data=data;
+        i=row;
+        j=col;
+    }
+};
+class cmp{
+    public:
+    bool operator()(node* &a,node* &b){
+        return a->data > b->data;
+    }
+};
+class Solution{
+    public:
+    //Function to merge k sorted arrays.
+    vector<int> mergeKArrays(vector<vector<int>> arr, int k){
+        priority_queue<node* ,vector<node*>,cmp> pq;
+        for(int i=0;i<k;i++){
+            node* n=new node(arr[i][0],i,0);
+            pq.push(n);
+        }
+        
+        vector<int> ans;
+        
+        while(pq.size()>0){
+            node* x=pq.top();
+            ans.push_back(x->data);
+            pq.pop();
+            
+            int i=x->i;
+            int j=x->j;
+            
+            if(j+1 < arr[i].size()){
+                node* n=new node(arr[i][j+1],i,j+1);
+                pq.push(n);
+            }
+        }
+        return ans;
+    }
+};
