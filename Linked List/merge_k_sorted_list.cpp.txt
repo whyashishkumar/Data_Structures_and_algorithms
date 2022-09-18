@@ -1,0 +1,42 @@
+class cmp{
+    public:
+    bool operator()(ListNode* &a,ListNode* &b){
+        return a->val > b->val;
+    }
+};
+class Solution {
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        
+        int k=lists.size();
+        if(k==0){
+            return NULL;
+        }
+        
+        priority_queue<ListNode*,vector<ListNode*>,cmp> pq;
+        for(int i=0;i<k;i++){
+            if(lists[i]!=NULL){
+                pq.push(lists[i]);
+            }
+        }
+        ListNode* head=NULL;
+        ListNode* tail=NULL;
+        while(pq.size()>0){
+            ListNode* x=pq.top();
+            pq.pop();
+            if(x->next!=NULL){
+                pq.push(x->next);
+            }
+            if(head==NULL){
+                head=x;
+                tail=x;
+                
+            }
+            else{
+                tail->next=x;
+                tail=tail->next;
+            }
+        }
+        return head;
+    }
+};
