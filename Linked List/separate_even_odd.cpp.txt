@@ -1,0 +1,35 @@
+class Solution{
+public:
+    void insert(Node* &head,Node* &tail,int data){
+        Node* n=new Node(data);
+        if(head==NULL){
+            head=n;
+            tail=head;
+            return ;
+        }
+        tail->next=n;
+        tail=n;
+    }
+    Node* divide(int N, Node *head){
+        Node* odd=NULL;
+        Node* even=NULL;
+        Node* oddtail=odd;
+        Node* eventail=even;
+        
+        Node* temp=head;
+        while(temp!=NULL){
+            if(temp->data%2==0){
+                insert(even,eventail,temp->data);
+            }
+            else if(temp->data%2!=0){
+                insert(odd,oddtail,temp->data);
+            }
+            temp=temp->next;
+        }
+        if(even==NULL){
+            return odd;
+        }
+        eventail->next=odd;
+        return even;
+    }
+};
